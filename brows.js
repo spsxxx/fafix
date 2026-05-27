@@ -340,7 +340,6 @@ function mark_target(target){
             first = false
             indicator = wrapper
             indicator.id = '_fafix_hwm_indicator'
-            indicator.style.backgroundColor='#105b21'
             indicator.className += ' indy'
             }
         gallery.append(wrapper)
