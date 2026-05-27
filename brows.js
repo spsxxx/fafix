@@ -17,6 +17,9 @@ var form_config_lookup = {};
 form = document.querySelector("form[name='replyform']")
 fa_update = form.querySelector('input[name="go"]')
 
+//////////////
+// add hwm ui
+
 // current hwm label
 form_title = form.querySelector('font')
 current_value = document.querySelector('#_fafix_current_hwm')
@@ -24,7 +27,7 @@ if (current_value == null){
     current_value = document.createElement('span')
     current_value.id = '_fafix_current_hwm'
     form_title.after(current_value)
-}
+    }
 current_value.style.margin='3px'
 
 // this page's hwm label
@@ -34,7 +37,7 @@ if (new_value == null){
     new_value = document.createElement('span')
     new_value.id = '_fafix_new_hwm'
     current_value.after(new_value)
-}
+    }
 new_value.style.margin='3px'
 
 // selector
@@ -84,7 +87,7 @@ if (goto_hwm == null){
     goto_hwm.id='_fafix_goto_hwm'
     fa_update.before(goto_hwm)
     goto_hwm.addEventListener("click", my_goto_hwm)
-}
+    }
 goto_hwm.value = 'junp'
 goto_hwm.type = 'button'
 goto_hwm.className = 'button active'
@@ -92,82 +95,46 @@ goto_hwm.className = 'button active'
 //goto_hwm.style.marginTop = '0px'
 
 function my_goto_hwm(){
-
     if(goto_hwm.value == 'junp'){
     console.log('go to hwm')
         indicator = document.querySelector('#_fafix_hwm_indicator')
         if(indicator != null){
             window.scrollTo(0, indicator.offsetTop);
+            }
         }
-    }
     else if (goto_hwm.value == 'next') {
     console.log('go to next page then')
         goto_next_page()
-    }
+        }
     else if (goto_hwm.value == 'prev') {
     console.log('go to prev page then')
         goto_prev_page()
+        }
     }
 
-
-}
 function goto_next_page(){
     button = document.querySelector("button[class='button right']")
-    if(button.innerHTML == 'Next')
-    {
+    if(button.innerHTML == 'Next'){
         button.click();
+        }
     }
-}
+
 function goto_prev_page(){
     button = document.querySelector("button[class='button left']")
-    if(button.innerHTML == 'Back')
-    {
+    if(button.innerHTML == 'Back'){
         button.click();
+        }
     }
-}
 
 // bunp button
 
-function get_display_name(form_data) {
-    display_name = ''
-    field = form.querySelector(`[name='atype']`)
-    value = form_data['atype']
-    if (value != '1') {
-        option = field.querySelector(`option[value='${value}']`)
-        _type = option.innerText
-        display_name += _type
-        }
-
-    field = form.querySelector(`[name='species']`)
-    value = form_data['species']
-    option = field.querySelector(`option[value='${value}']`)
-    _species = option.innerText
-    if (value != '1')
-    {
-        if(display_name != '') {display_name += ' | '}
-        display_name += _species
-    }
-
-    if(form_data['rating_general']){ display_name += ' X'}
-    else {display_name +=' _' }
-    if(form_data['rating_mature']){ display_name += 'X'}
-    else {display_name +='_' }
-    if(form_data['rating_adult']){ display_name += 'X'}
-    else {display_name +='_' }
-
-    if (display_name == '') { display_name = 'No Filter'}
-    return display_name
-    }
-
-
-
 update_hwm = document.querySelector('#_fafix_update_hwm')
 if (update_hwm == null){
-update_hwm = document.createElement('input')
-update_hwm.id='_fafix_update_hwm'
-selector.after(update_hwm)
-update_hwm.addEventListener("click", my_update_hwm)
-}
+    update_hwm = document.createElement('input')
+    update_hwm.id='_fafix_update_hwm'
+    selector.after(update_hwm)
+    update_hwm.addEventListener("click", my_update_hwm)
+    }
 update_hwm.value = 'bunp'
 update_hwm.type = 'button'
 update_hwm.className = 'button active'
@@ -212,13 +179,12 @@ function my_update_hwm(){
 form_data = new FormData(form)
 
 complete_form_config = ''
-for(key of complete_form_keys) 
-{
+for(key of complete_form_keys) {
     complete_form_config += '|'+key+':'+form_data.get(key)
-}
+    }
 console.log(complete_form_config)
 
-//retrieve the current hwm
+//retrieve configs and populate selections
 
 getting_item = browser.storage.local.get()
 getting_item.then(onGot, onError)
@@ -244,7 +210,7 @@ function onGot(item) {
                 hwm: item[key]['sid'],
                 })
             }
-    }
+        }
 
     menu_items.sort((a,b) => a.hwm-b.hwm)
     selector.innerHTML = ''
@@ -267,11 +233,11 @@ function onGot(item) {
         selector.value = complete_form_config
         mark_target(target)
         }
-}
+    }
 
 function onError(error) {
-  console.log(`Error: ${error}`);
-}
+    console.log(`Error: ${error}`);
+    }
 
 
 
@@ -361,6 +327,39 @@ function mark_target(target){
 
 
     }
+
+function get_display_name(form_data) {
+    display_name = ''
+    field = form.querySelector(`[name='atype']`)
+    value = form_data['atype']
+    if (value != '1') {
+        option = field.querySelector(`option[value='${value}']`)
+        _type = option.innerText
+        display_name += _type
+        }
+
+    field = form.querySelector(`[name='species']`)
+    value = form_data['species']
+    option = field.querySelector(`option[value='${value}']`)
+    _species = option.innerText
+    if (value != '1')
+    {
+        if(display_name != '') {display_name += ' | '}
+        display_name += _species
+    }
+
+    if(form_data['rating_general']){ display_name += ' X'}
+    else {display_name +=' _' }
+    if(form_data['rating_mature']){ display_name += 'X'}
+    else {display_name +='_' }
+    if(form_data['rating_adult']){ display_name += 'X'}
+    else {display_name +='_' }
+
+    if (display_name == '') { display_name = 'No Filter'}
+    return display_name
+    }
+
+
 
 
 }
