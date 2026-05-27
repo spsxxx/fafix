@@ -38,10 +38,7 @@ function get_items(){
 
 	for (artist_name in entry_map){
 		wrapper = document.createElement('div')
-                        wrapper.style.backgroundColor='#20213b'
-                        wrapper.style.borderRadius='0 0 14px 14px'
-			wrapper.style.display='inline-block'
-			wrapper.style.margin='5px'
+		wrapper.className = 'subgroup'
 		section.append(wrapper)
 		for(entry of entry_map[artist_name]){
 			

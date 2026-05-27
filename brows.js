@@ -29,11 +29,6 @@ function parse_figure(figure){
 	}
 
 
-
-form_keys = ['cat','atype','species','gender', 
-//'rating_general', 'rating_mature', 'rating_adult'
-]
-
 complete_form_keys = ['cat','atype','species','gender', 
 'rating_general', 'rating_mature', 'rating_adult'
 ]
@@ -81,7 +76,6 @@ selector.className = 'listbox'
 function change_query(){
 	console.log(selector.value)
 	key = selector.value
-//	pkey = parse_key(key)
 	pkey = form_config_lookup[key]['pkey']
 
 	for (name of rating_keys) {
@@ -210,18 +204,9 @@ function my_update_hwm(){
 	all_of_them = document.querySelectorAll('figure')
 	sid = parseInt(all_of_them[0].id.substring(4))
 
-//#	browser.storage.local.set({[form_config]:sid})
-
 	form_data = new FormData(form)
 
-	form_config = ''
 	complete_form_config = ''
-
-	for(key of form_keys) {
-		form_config += '|'+key+':'+form_data.get(key)
-		}
-	console.log(form_config)
-
 	for(key of complete_form_keys) {
 		complete_form_config += '|'+key+':'+form_data.get(key)
 		}
@@ -252,25 +237,12 @@ function my_update_hwm(){
 
 form_data = new FormData(form)
 
-form_config = ''
 complete_form_config = ''
-
-for(key of form_keys) 
-{
-    form_config += '|'+key+':'+form_data.get(key)
-}
-console.log(form_config)
-
 for(key of complete_form_keys) 
 {
     complete_form_config += '|'+key+':'+form_data.get(key)
 }
 console.log(complete_form_config)
-
-
-//TODO
-//target = 63324648
-//browser.storage.local.set({[form_config]:target})
 
 //retrieve the current hwm
 
@@ -289,19 +261,7 @@ function onGot(item) {
 	menu_items = []
 
 	for (key in item) {
-		console.log(typeof(item[key]))
-		if(typeof(item[key]) != "object") {
-			/*pkey = parse_key(key)
-			if (pkey != null && false){ //TODO remove me
-				menu_items.push({
-					form_key: key,
-					key: key,
-					pkey: pkey,
-					hwm: item[key],
-					})
-				}*/
-			}
-		else {
+		if(typeof(item[key]) == "object") {
 			display_name = get_display_name(item[key]['form_data'])
 			menu_items.push({
 				form_key: key,
@@ -333,27 +293,12 @@ function onGot(item) {
 		selector.value = complete_form_config
 		mark_target(target)
 		}
-
-
 }
 
 function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-
-function parse_key(key){
-	result = {}
-	for(pair of key.split('|')){
-		if (pair == '') {continue}
-		parts = pair.split(':')
-		if (parts.length != 2){
-			return null
-			}
-		result[parts[0]] = parts[1]	
-		}
-	return result
-	}
 
 
 function mark_target(target){
@@ -375,8 +320,6 @@ function mark_target(target){
 	goto_hwm = document.querySelector('#_fafix_goto_hwm')
 	goto_hwm.className = 'button inactive'
 	indicator = null
-
-	found_hwm = false
 
 	before_map = {}
 	after_map = {}
@@ -429,7 +372,6 @@ function mark_target(target){
 		}
 		else {
 			first = false
-			found_hwm = true
 			indicator = wrapper
 			indicator.id = '_fafix_hwm_indicator'
 			indicator.style.backgroundColor='#105b21'
@@ -452,48 +394,6 @@ function mark_target(target){
 		goto_hwm.value = 'junp'
 		}
 
-
-	/*
-	for(var idx in all_of_them) {
-		entry = all_of_them[idx]
-		//console.log(entry)
-		if (entry.id == null) {continue}
-		sid = parseInt(entry.id.substring(4))
-
-
-		if((last_sid > target || last_sid == 0) && sid <= target) {
-			found_hwm = true
-
-
-			indicator = document.createElement('div')
-//			indicator.style.height = entry.style.height
-			indicator.style.display='inline-block'
-//			indicator.style.width='4px'
-//			indicator.style.backgroundColor='#00ff00'
-			indicator.id = '_fafix_hwm_indicator'
-			entry.parentNode.insertBefore(indicator, entry)	
-
-			entry.style.backgroundColor='#105b21'
-			entry.style.borderRadius='0 0 14px 14px'
-//			cap = entry.querySelector('figcaption')
-//			cap.style.backgroundColor='#2e3b41'
-
-			if(last_sid == 0 && sid != target) {
-				goto_hwm.value = 'prev'
-				}
-			else {
-				goto_hwm.className = 'button active'
-				goto_hwm.value = 'junp'
-				}
-			}
-
-		last_sid = sid
-
-		}
-*/
-	if(found_hwm == false) {
-		//goto_hwm.value = 'next'
-		}
 
 	}
 

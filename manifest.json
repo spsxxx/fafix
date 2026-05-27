@@ -16,14 +16,15 @@
     },
     {
       "matches": ["*://*.furaffinity.net/msg/submissions/*"],
-      "js": ["subby.js"]
+      "js": ["subby.js"],
+      "css": ["stylez.css"]
     }
   ],
   "permissions": [
 "cookies",
 "storage",
 "<all_urls>"
-	],
+    ],
 
 "browser_specific_settings": {
   "gecko": {
