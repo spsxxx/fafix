@@ -1,7 +1,3 @@
-//document.body.style.border = "5px solid blue";
-console.log('\n\n\n\n\n')
-
-
 body = document.querySelector('body');
 is_classic = body.getAttribute('data-static-path').includes('classic');
 
@@ -198,7 +194,6 @@ update_hwm.type = 'button'
 update_hwm.className = 'button active'
 //update_hwm.style.float='right'
 
-console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
 function my_update_hwm(){
     console.log("get ur bunp on")
     all_of_them = document.querySelectorAll('figure')
@@ -351,10 +346,7 @@ function mark_target(target){
 
     for (artist_name in before_map){
         wrapper = document.createElement('div')
-            wrapper.style.backgroundColor='#20213b'
-            wrapper.style.borderRadius='0 0 14px 14px'
-            wrapper.style.display='inline-block'
-            wrapper.style.margin='5px'
+        wrapper.className = 'subgroup'
         gallery.append(wrapper)
         for(entry of before_map[artist_name]){
             wrapper.append(entry)
@@ -364,18 +356,13 @@ function mark_target(target){
     first = true
     for (artist_name in after_map){
         wrapper = document.createElement('div')
-            wrapper.style.borderRadius='0 0 14px 14px'
-            wrapper.style.display='inline-block'
-            wrapper.style.margin='5px'
-        if(!first) {
-            wrapper.style.backgroundColor='#20213b'
-        }
-        else {
+        wrapper.className = 'subgroup'
+        if(first) {
             first = false
             indicator = wrapper
             indicator.id = '_fafix_hwm_indicator'
             indicator.style.backgroundColor='#105b21'
-
+            indicator.className += ' indy'
             }
         gallery.append(wrapper)
         for(entry of after_map[artist_name]){

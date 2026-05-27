@@ -12,7 +12,8 @@
   "content_scripts": [
     {
       "matches": ["*://*.furaffinity.net/browse/*"],
-      "js": ["brows.js"]
+      "js": ["brows.js"],
+      "css": ["stylez.css"]
     },
     {
       "matches": ["*://*.furaffinity.net/msg/submissions/*"],
