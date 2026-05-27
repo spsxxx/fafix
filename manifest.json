@@ -12,12 +12,12 @@
   "content_scripts": [
     {
       "matches": ["*://*.furaffinity.net/browse/*"],
-      "js": ["brows.js"],
+      "js": ["utilz.js", "brows.js"],
       "css": ["stylez.css"]
     },
     {
       "matches": ["*://*.furaffinity.net/msg/submissions/*"],
-      "js": ["subby.js"],
+      "js": ["utilz.js", "subby.js"],
       "css": ["stylez.css"]
     }
   ],

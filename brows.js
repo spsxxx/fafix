@@ -4,27 +4,6 @@ is_classic = body.getAttribute('data-static-path').includes('classic');
 if(is_classic)
 {
 
-function parse_figure(figure){
-    result = {}
-
-    sid = parseInt(figure.id.substring(4))
-    result['sid'] = sid
-
-    links = figure.querySelectorAll('a')
-    for (var entry of links) {
-        if (entry.title == '') {continue}
-        if (entry.href.includes('user')) {
-            result['artist'] = entry
-            }
-        else {
-            result['title'] = entry
-            }    
-        }
-
-    return result
-    }
-
-
 complete_form_keys = ['cat','atype','species','gender', 
 'rating_general', 'rating_mature', 'rating_adult'
 ]
