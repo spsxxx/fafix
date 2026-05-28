@@ -16,6 +16,11 @@
       "css": ["stylez.css"]
     },
     {
+      "matches": ["*://*.furaffinity.net/search/*"],
+      "js": ["utilz.js", "search.js"],
+      "css": ["stylez.css"]
+    },
+    {
       "matches": ["*://*.furaffinity.net/msg/submissions/*"],
       "js": ["utilz.js", "subby.js"],
       "css": ["stylez.css"]
