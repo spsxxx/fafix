@@ -163,6 +163,7 @@ function my_update_hwm(){
     form_object = {
         sid: sid,
         form_data: form_json,
+        kind: 'fa_browse',
         display_name: `${_type}|${_species}`
         }
     console.log(form_object)
@@ -200,8 +201,8 @@ function onGot(item) {
 
     menu_items = []
 
-    for (key in item) {
-        if(typeof(item[key]) == "object") {
+    for (key in item) { //TODO filter on kind = 'fa_browse'
+        if(typeof(item[key]) == "object" && item[key]['form_data']) {
             display_name = get_display_name(item[key]['form_data'])
             menu_items.push({
                 form_key: key,
@@ -245,12 +246,6 @@ function mark_target(target){
     submit = document.querySelector("input[name='go']")
 
     current_value = document.querySelector('#_fafix_current_hwm')
-    if (current_value == null){
-        current_value = document.createElement('span')
-        current_value.id = '_fafix_current_hwm'
-        submit.after(current_value)
-    }
-
     current_value.innerHTML = target
 
 
