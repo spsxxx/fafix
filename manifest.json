@@ -24,7 +24,13 @@
       "matches": ["*://*.furaffinity.net/msg/submissions/*"],
       "js": ["utilz.js", "subby.js"],
       "css": ["stylez.css"]
+    },
+    {
+      "matches": ["*://*.e621.net/posts?*"],
+      "js": ["utilz.js", "e6.js"],
+      "css": ["stylez.css"]
     }
+ 
   ],
   "permissions": [
 "cookies",
